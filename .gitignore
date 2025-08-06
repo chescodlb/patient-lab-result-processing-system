@@ -1,0 +1,8 @@
+*.log
+src/dist
+src/node_modules
+coverage
+node_modules
+docs
+package-lock.json
+.vscode
