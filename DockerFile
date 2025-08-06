@@ -1,0 +1,25 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install Redis
+RUN apk add --no-cache redis
+
+# Copy package files
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Copy source code
+COPY . .
+
+# Build TypeScript
+RUN npm run build
+
+# Expose ports
+EXPOSE 3000 6379
+
+# Start script that runs Redis and the app
+COPY start.sh ./
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]
