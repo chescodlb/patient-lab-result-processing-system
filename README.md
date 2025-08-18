@@ -183,7 +183,7 @@ for i in {1..25}; do
   
   # Select random lab type
   randomIndex=$((RANDOM % 5))
-  labType=${labTypes[$randomIndex]}
+  labType=${labTypes[$randomIndex+1]}
   
   curl -X POST http://localhost:3000/api/lab-results \
     -H "Content-Type: application/json" \
