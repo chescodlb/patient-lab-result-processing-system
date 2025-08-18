@@ -4,6 +4,12 @@ dotenv.config();
 
 export const config = {
   port: parseInt(process.env.PORT || '3000', 10),
+  // Configuración de clusters
+  cluster: {
+    enabled: process.env.CLUSTER_ENABLED === 'true' || process.env.NODE_ENV === 'production',
+    workerCount: parseInt(process.env.WORKER_COUNT || '1') || require('os').cpus().length,
+    shutdownTimeout: parseInt(process.env.SHUTDOWN_TIMEOUT || '30000'), // 30 segundos
+  },
   redis: {
     url: process.env.REDIS_URL || 'redis://localhost:6379',
   },
